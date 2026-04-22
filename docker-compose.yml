@@ -1,0 +1,23 @@
+services:
+  novelforge-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: novelforge-dev
+    ports:
+      - "54321:54321"
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - backend-venv:/app/backend/.venv
+      - frontend-modules:/app/frontend/node_modules
+      - pip-cache:/root/.cache/pip
+    environment:
+      - TZ=Asia/Shanghai
+    stdin_open: true
+    tty: true
+
+volumes:
+  backend-venv:
+  frontend-modules:
+  pip-cache:
