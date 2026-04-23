@@ -27,6 +27,9 @@ if [ ! -d "$FRONTEND_DIR/node_modules" ]; then
     cd "$FRONTEND_DIR" && npm install
 fi
 
+# Export PATH so npm scripts can find node_modules/.bin
+export PATH="$FRONTEND_DIR/node_modules/.bin:$PATH"
+
 # --- Start backend ---
 echo "[novelforge] Starting backend on :54321 ..."
 cd "$BACKEND_DIR"
@@ -36,7 +39,7 @@ BACKEND_PID=$!
 # --- Start frontend (web mode) ---
 echo "[novelforge] Starting frontend on :5173 ..."
 cd "$FRONTEND_DIR"
-npm run dev:web -- --host 0.0.0.0 &
+VITE_APP_PLATFORM=web vite dev -c vite.config.web.ts --host 0.0.0.0 &
 FRONTEND_PID=$!
 
 # Wait for first exit, then kill the other
