@@ -15,6 +15,7 @@ out
 docImgs
 *.md
 !README.md
-docker
+docker/*
+!docker/entrypoint.sh
 docker-compose.yml
 start.sh

@@ -3,7 +3,7 @@ FROM python:3.11-slim
 ARG NODE_VERSION=20.19.0
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl xz-utils \
+    && apt-get install -y --no-install-recommends bash curl xz-utils \
     && curl -fsSL https://npmmirror.com/mirrors/node/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz \
        | tar -xJ -C /usr/local --strip-components=1 \
     && rm -rf /var/lib/apt/lists/*
