@@ -36,7 +36,7 @@ BACKEND_PID=$!
 # --- Start frontend (web mode) ---
 echo "[novelforge] Starting frontend on :5173 ..."
 cd "$FRONTEND_DIR"
-VITE_APP_PLATFORM=web npx vite dev -c vite.config.web.ts --host 0.0.0.0 &
+npm run dev:web -- --host 0.0.0.0 &
 FRONTEND_PID=$!
 
 # Wait for first exit, then kill the other
