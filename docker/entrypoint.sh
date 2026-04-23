@@ -5,7 +5,7 @@ BACKEND_DIR="/app/backend"
 FRONTEND_DIR="/app/frontend"
 
 # --- Backend: venv + deps ---
-if [ ! -f "$BACKEND_DIR/.venv/bin/activate" ]; then
+if [ ! -f "$BACKEND_DIR/.venv/bin/pip" ]; then
     echo "[novelforge] Creating venv and installing backend deps..."
     python -m venv "$BACKEND_DIR/.venv"
     # shellcheck disable=SC1091
@@ -22,12 +22,11 @@ if [ ! -f "$BACKEND_DIR/.env" ]; then
 fi
 
 # --- Frontend: deps ---
-if [ ! -d "$FRONTEND_DIR/node_modules" ]; then
+if [ ! -f "$FRONTEND_DIR/node_modules/.package-lock.json" ]; then
     echo "[novelforge] Installing frontend deps..."
     cd "$FRONTEND_DIR" && npm install
 fi
 
-# Export PATH so npm scripts can find node_modules/.bin
 export PATH="$FRONTEND_DIR/node_modules/.bin:$PATH"
 
 # --- Start backend ---
